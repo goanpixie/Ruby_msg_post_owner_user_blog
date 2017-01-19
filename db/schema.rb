@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170119070242) do
+ActiveRecord::Schema.define(version: 20170119214537) do
 
   create_table "blogs", force: true do |t|
     t.string   "name"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 20170119070242) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "comments", force: true do |t|
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id"
 
   create_table "messages", force: true do |t|
     t.string   "author"
@@ -53,6 +62,15 @@ ActiveRecord::Schema.define(version: 20170119070242) do
 
   add_index "posts", ["blog_id"], name: "index_posts_on_blog_id"
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
+
+  create_table "tips", force: true do |t|
+    t.integer  "Tipable_id"
+    t.string   "Tipable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tips", ["Tipable_id", "Tipable_type"], name: "index_tips_on_Tipable_id_and_Tipable_type"
 
   create_table "users", force: true do |t|
     t.string   "first_name"
